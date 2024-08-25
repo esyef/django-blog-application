@@ -9,6 +9,12 @@ from django.utils import timezone
 """
 
 class Post(models.Model):
+
+    # enumeration Class
+    class Status(models.TextChoices):
+        DRAFT = 'DF', 'Draft'
+        PUBLISHED = 'PB', 'Published'
+    
     title = models.CharField(max_length=250)
     """
         slug is used by SEO friendly, for example django-renhardt-legend-jazz
@@ -23,6 +29,11 @@ class Post(models.Model):
 
     # auto_now store th last date and time when the post was updated
     updated = models.DateTimeField(auto_now=True)
+    status = models.CharField(
+        max_length=2,
+        choices=Status,
+        default=Status.DRAFT
+    )
 
     class Meta:
         ordering = ['-publish']
