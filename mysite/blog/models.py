@@ -24,6 +24,9 @@ class Post(models.Model):
     # auto_now store th last date and time when the post was updated
     updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['-publish']
+
     """
         Django use this method to display the name of the object in mane places,
         such as the Django
