@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
@@ -33,6 +34,13 @@ class Post(models.Model):
         max_length=2,
         choices=Status,
         default=Status.DRAFT
+    )
+
+    # many-to-one relationship
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='blog_post'
     )
 
     class Meta:
