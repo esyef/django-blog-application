@@ -26,6 +26,9 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-publish']
+        indexes = [
+            models.Index(fields=['-publish']),
+        ]
 
     """
         Django use this method to display the name of the object in mane places,
