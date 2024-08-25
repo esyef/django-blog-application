@@ -4,6 +4,12 @@ from django.utils import timezone
 
 # Create your models here.
 
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return (
+            super().get_queryset().filter(status=Post.Status.PUBLISHED)
+        )
+
 """
     Every model is translated to db table, in this case by de app blog each model will added flag blog_ in the name,
     for example blog_post table.
@@ -48,6 +54,11 @@ class Post(models.Model):
         indexes = [
             models.Index(fields=['-publish']),
         ]
+
+    # keep the default objects manager
+    objects = models.Manager() # Default manager (objects)
+    published = PublishedManager() # Our custom manager
+
 
     """
         Django use this method to display the name of the object in mane places,
