@@ -27,7 +27,7 @@ class Post(models.Model):
     """
         slug is used by SEO friendly, for example django-renhardt-legend-jazz
     """
-    slug = models.SlugField(max_length=250)
+    slug = models.SlugField(max_length=250, unique_for_date='publish')
     body = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     
