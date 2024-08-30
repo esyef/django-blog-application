@@ -13,7 +13,7 @@ def post_list(request):
     )
 
 
-def post_detail(request, id):
+def post_detail(request, year, month, day, post):
     # try:
     #     post = Post.published.get(id=id)
     # except Post.DoesNotExist:
@@ -22,7 +22,10 @@ def post_detail(request, id):
     post = get_object_or_404(
         Post,
         id=id,
-        status=Post.Status.PUBLISHED
+        status=Post.Status.PUBLISHED,
+        publish__year=year,
+        publish__month=month,
+        publish__day=day
     )
     return render(
         request,
